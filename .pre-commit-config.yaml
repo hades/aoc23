@@ -1,0 +1,30 @@
+repos:
+-   repo: https://github.com/hades/pre-commit-hooks
+    rev: main
+    hooks:
+    -   id: check-added-large-files
+    -   id: check-merge-conflict
+    -   id: check-toml
+    -   id: check-yaml
+    -   id: end-of-file-fixer
+    -   id: trailing-whitespace
+- repo: local
+  hooks:
+    - id: pylint
+      name: Checking Python code for problems
+      entry: poetry run pylint -rn -sn aoc23
+      language: system
+      pass_filenames: false
+      types: [python]
+    - id: pytype
+      name: Checking Python typings with pytype
+      entry: poetry run pytype
+      language: system
+      pass_filenames: false
+      types: [python]
+    - id: pytest
+      name: Running unit tests
+      entry: poetry run pytest -q
+      language: system
+      pass_filenames: false
+      types: [python]
