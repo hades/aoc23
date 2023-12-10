@@ -1,4 +1,6 @@
 from .solver import Solver
+
+
 class Day09(Solver):
 
   def __init__(self):

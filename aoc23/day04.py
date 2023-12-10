@@ -3,6 +3,7 @@ import re
 
 from .solver import Solver
 
+
 class Day04(Solver):
   def __init__(self):
     super().__init__(4)

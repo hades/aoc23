@@ -1,4 +1,4 @@
-import portion as P
+import portion as P  # noqa: N812
 
 from .solver import Solver
 
@@ -34,7 +34,7 @@ class Day05(Solver):
     self.mappings = {}
     for mapping in group_lines_in_maps(lines[2:]):
       mapping_name = mapping[0].split(' ')[0]
-      mapping_ranges = map(lambda rng: tuple(map(int, rng.split(' '))), mapping[1:])
+      mapping_ranges = (tuple(map(int, rng.split(' '))) for rng in mapping[1:])
       self.mappings[mapping_name] = list(mapping_ranges)
 
 
@@ -65,7 +65,7 @@ class Day05(Solver):
         source_range = P.closedopen(source, source + length)
         mappable = unmapped & source_range
         mapped_to_destination = mappable.apply(
-            lambda x: (x.left, x.lower + delta, x.upper + delta, x.right))  # pylint: disable=cell-var-from-loop
+            lambda x: (x.left, x.lower + delta, x.upper + delta, x.right))  # noqa: B023
         next_set = next_set | mapped_to_destination
         unmapped = unmapped - source_range
       current_set = next_set | unmapped

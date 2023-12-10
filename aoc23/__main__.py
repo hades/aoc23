@@ -7,6 +7,7 @@ from cleo.io.inputs.option import Option
 
 from .solver import get_solver_for_day
 
+
 class CleoHandler(logging.Handler):
   def __init__(self, io):
     super().__init__()
@@ -42,7 +43,7 @@ class SolveCommand(Command):
     self.line(f'<info>Solving day {day} challenge</info>')
     solver = get_solver_for_day(day)
     with self.spin('reading file', 'reading file complete'):
-      with open(file, 'rt', encoding='utf-8') as f:
+      with open(file, encoding='utf-8') as f:
         input = f.read()
     with self.spin('parsing and pre-solving', 'presolving complete'):
       solver.presolve(input)

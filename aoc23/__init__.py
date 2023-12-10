@@ -24,7 +24,6 @@ from .day23 import Day23
 from .day24 import Day24
 from .day25 import Day25
 
-
 Day01()
 Day02()
 Day03()

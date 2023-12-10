@@ -2,6 +2,7 @@ from unittest import TestCase
 
 from aoc23 import util
 
+
 class TestUpperBound(TestCase):
   def test_asserts_start_stop(self):
     with self.assertRaises(AssertionError):

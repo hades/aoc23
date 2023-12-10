@@ -1,10 +1,10 @@
 import re
-
 from functools import reduce
 from operator import mul
 
 from .solver import Solver
 from .util import upper_bound
+
 
 def travel_distance(hold: int, limit: int) -> int:
   dist = hold * (limit - hold)
@@ -33,7 +33,7 @@ class Day06(Solver):
 
   def solve_first_star(self):
     ways= []
-    for time, record in zip(self.times, self.distances):
+    for time, record in zip(self.times, self.distances, strict=True):
       ways.append(ways_to_win(time, record))
     return reduce(mul, ways)
 

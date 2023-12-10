@@ -2,6 +2,7 @@ import re
 
 from .solver import Solver
 
+
 class Day01(Solver):
   def __init__(self):
     super().__init__(1)

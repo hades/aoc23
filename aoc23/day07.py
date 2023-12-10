@@ -66,7 +66,7 @@ class Day07(Solver):
 
   def presolve(self, input: str):
     lines = input.rstrip().split('\n')
-    self.hands = list(map(lambda line: line.split(' '), lines))
+    self.hands = [tuple(line.split(' ')) for line in lines]
 
   def solve_first_star(self):
     hands = self.hands[:]

@@ -3,6 +3,7 @@ import re
 
 from .solver import Solver
 
+
 class Day03(Solver):
   def __init__(self):
     super().__init__(3)
@@ -32,7 +33,6 @@ class Day03(Solver):
     return sum(numbers)
 
   def solve_second_star(self):
-    gear_numbers = collections.defaultdict(list)
     adjacent_to_gears = {}
     for i, line in enumerate(self.lines):
       for j, sym in enumerate(line):
@@ -40,6 +40,7 @@ class Day03(Solver):
           for di in (-1, 0, 1):
             for dj in (-1, 0, 1):
               adjacent_to_gears[(i + di, j + dj)] = (i, j)
+    all_gear_numbers = collections.defaultdict(list)
     for i, line in enumerate(self. lines):
       for number_match in re.finditer(r'\d+', line):
         adjacent_to_gear = None
@@ -47,9 +48,9 @@ class Day03(Solver):
           if (i, j) in adjacent_to_gears:
             adjacent_to_gear = adjacent_to_gears[(i, j)]
         if adjacent_to_gear:
-          gear_numbers[adjacent_to_gear].append(int(number_match.group()))
+          all_gear_numbers[adjacent_to_gear].append(int(number_match.group()))
     ratios = []
-    for gear_numbers in gear_numbers.values():
+    for gear_numbers in all_gear_numbers.values():
       match gear_numbers:
         case [a, b]:
           ratios.append(a * b)

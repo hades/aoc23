@@ -2,6 +2,7 @@ import collections
 
 from .solver import Solver
 
+
 class Day02(Solver):
   def __init__(self):
     super().__init__(2)
@@ -23,7 +24,7 @@ class Day02(Solver):
       for draw in game:
         for item in draw:
           count, colour = item.split(' ')
-          if (colour == 'red' and int(count) > 12 or  # pylint: disable=too-many-boolean-expressions
+          if (colour == 'red' and int(count) > 12 or
                 colour == 'blue' and int(count) > 14 or
                 colour == 'green' and int(count) > 13):
             is_good = False

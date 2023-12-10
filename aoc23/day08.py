@@ -4,6 +4,7 @@ import re
 
 from .solver import Solver
 
+
 class Day08(Solver):
 
   def __init__(self):
@@ -37,7 +38,7 @@ class Day08(Solver):
 
   def solve_second_star(self) -> int:
     start_nodes: list[str] = [node for node in self.nodes if node.endswith('A')]
-    end_nodes: set[str] = set(node for node in self.nodes if node.endswith('Z'))
+    end_nodes: set[str] = {node for node in self.nodes if node.endswith('Z')}
     loop_offsets: dict[str, int] = {}
     loop_sizes: dict[str, int] = {}
     destination_offset_in_loops: dict[str, list[int]] = {}

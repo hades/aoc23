@@ -1,5 +1,6 @@
 from unittest import TestCase
 
+
 class TestDay17(TestCase):
   pass
 

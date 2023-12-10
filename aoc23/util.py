@@ -1,4 +1,5 @@
-from typing import Callable
+from collections.abc import Callable
+
 
 def upper_bound(start: int, stop: int, predicate: Callable[[int], bool]) -> int:
   """Find the smallest integer in [start, stop) for which the predicate is
