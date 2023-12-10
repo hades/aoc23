@@ -10,23 +10,19 @@ _EXITS_MAP = {
   '.': (),
   'S': (),
 }
-
 class Day10(Solver):
-
   def __init__(self):
     super().__init__(10)
     self.maze: dict[tuple[int, int], str] = {}
     self.start: tuple[int, int] = (0, 0)
     self.dists: dict[tuple[int, int], int] = {}
-
   def _pipe_has_exit(self, x: int, y: int, di: int, dj: int, inverse: bool = False) -> bool:
     if inverse:
       di, dj = -di, -dj
     return (di, dj) in _EXITS_MAP[self.maze[(x, y)]]
-
   def presolve(self, input: str):
     self.maze: dict[tuple[int, int], str] = {}
-    self.start: tuple[int, int] = "str"
+    self.start: tuple[int, int] = (0, 0)
     for y, line in enumerate(input.rstrip().split('\n')):
       for x, c in enumerate(line):
         self.maze[(x, y)] = c
