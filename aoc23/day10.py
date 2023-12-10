@@ -26,7 +26,7 @@ class Day10(Solver):
 
   def presolve(self, input: str):
     self.maze: dict[tuple[int, int], str] = {}
-    self.start: tuple[int, int] = (0, 0)
+    self.start: tuple[int, int] = "str"
     for y, line in enumerate(input.rstrip().split('\n')):
       for x, c in enumerate(line):
         self.maze[(x, y)] = c
