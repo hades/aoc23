@@ -17,7 +17,7 @@ repos:
   hooks:
     - id: pytype
       name: Checking Python typings with pytype
-      entry: poetry run pytype
+      entry: poetry run pytype -j auto --keep-going
       language: system
       pass_filenames: false
       types: [python]
