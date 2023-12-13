@@ -1,4 +1,8 @@
+import datetime
+import inspect
 import logging
+import timeit
+import zoneinfo
 
 import requests
 from cleo.application import Application
@@ -64,9 +68,52 @@ class SolveCommand(Command):
       solution = solver.solve_second_star()
     self.line(f'Answer (second star): <comment>{solution}</>')
 
+class EvaluateCommand(Command):
+  name = "evaluate"
+  arguments = [
+    Argument("input_files", description="Where the problem input data is stored (1 file per day)",
+             required=False, is_list=True),
+  ]
+  options = [
+    Option("cookie", description="Session cookie for downloading input data",
+           flag=False),
+    Option("repeats_for_timing", description="How many times to solve the problem for timing purposes",
+           flag=False, default=3),
+  ]
+
+  def __solve_both_for_day(self, day: int, input: str):
+    solver = get_solver_for_day(day)
+    solver.flush_caches()
+    solver.presolve(input)
+    solver.solve_first_star()
+    solver.solve_second_star()
+
+  def handle(self):
+    days = min(25, (datetime.datetime.now(tz=zoneinfo.ZoneInfo('America/New_York')).date() -
+                    datetime.date(2023, 12, 1)).days + 1)
+    repeats = int(self.option('repeats_for_timing'))
+    times: list[float] = []
+    linecounts: list[int] = []
+    if len(self.argument('input_files')) != days and not self.option('cookie'):
+      self.line_error(f'Either provide {days} input files (one for each day) or a session cookie')
+      return 1
+    for day in range(1, days + 1):
+      with self.spin(f'retrieving input data for day {day}', f'input data for day {day} retrieved'):
+        input = get_problem_input(self.argument('input_files')[day - 1] if self.argument('input_files') else None,
+                                  day, self.option('cookie'))
+      with self.spin(f'solving {repeats} times', 'solved'):
+        times.append(min(timeit.repeat(
+          lambda: self.__solve_both_for_day(day, input),  # noqa: B023
+          repeat=repeats, number=1)))
+      linecounts.append(len(inspect.getsource(inspect.getmodule(type(get_solver_for_day(day)))).splitlines()))
+    self.table().set_headers(['Day', 'Time (s)', 'Lines', 'line-seconds']).add_rows([
+      [f'{day:2d}', f'{time:5.3f}', f'{linecount:4d}', f'{time * linecount:6.3f}']
+      for day, time, linecount in zip(range(1, days + 1), times, linecounts, strict=True)]).render()
+
 
 app = Application()
 app.add(SolveCommand())
+app.add(EvaluateCommand())
 
 app.run()
 

@@ -24,6 +24,19 @@ $ session=01234dead...beef
 $ poetry run python -m aoc23 solve 13 --cookie=$session
 ```
 
+Evaluation
+----------
+
+There is an option to run all of the solvers and show useful stats, such as
+lines of code in the solution, and how long the solver took. Just provide all
+of the input files, or a cookie:
+
+```sh
+$ session=01234dead...beef
+$ poetry run python -m aoc23 evaluate *.txt
+$ poetry run python -m aoc23 evaluate --cookie=$session
+```
+
 Developing
 ----------
 
