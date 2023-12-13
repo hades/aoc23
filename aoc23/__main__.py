@@ -1,5 +1,6 @@
 import logging
 
+import requests
 from cleo.application import Application
 from cleo.commands.command import Command
 from cleo.io.inputs.argument import Argument
@@ -17,15 +18,26 @@ class CleoHandler(logging.Handler):
   def emit(self, record):
     self.io.write_line(self.format(record))
 
+def get_problem_input(file: str|None, day: int, cookie: str|None) -> str:
+  if file:
+    with open(file, encoding='utf-8') as f:
+      return f.read()
+  if cookie:
+    url = f'https://adventofcode.com/2023/day/{day}/input'
+    r = requests.get(url, cookies={'session': cookie})
+    r.raise_for_status()
+    return r.text
+  raise RuntimeError('No input file or cookie provided')
 
 class SolveCommand(Command):
   name = "solve"
   arguments = [
     Argument("day", description="Which day (1 to 25) you want to solve"),
-    Argument("input_file", description="Where the problem input data is stored"),
+    Argument("input_file", description="Where the problem input data is stored", required=False),
   ]
   options = [
     Option("debug", description="Enables debug output", flag=True),
+    Option("cookie", description="Session cookie for downloading input data", flag=False),
   ]
 
   def _setup_debug_logging(self):
@@ -39,12 +51,10 @@ class SolveCommand(Command):
     if self.option('debug'):
       self._setup_debug_logging()
     day = int(self.argument('day'))
-    file = self.argument('input_file')
     self.line(f'<info>Solving day {day} challenge</info>')
     solver = get_solver_for_day(day)
     with self.spin('reading file', 'reading file complete'):
-      with open(file, encoding='utf-8') as f:
-        input = f.read()
+      input = get_problem_input(self.argument('input_file'), day, self.option('cookie'))
     with self.spin('parsing and pre-solving', 'presolving complete'):
       solver.presolve(input)
     with self.spin('solving', 'solved'):

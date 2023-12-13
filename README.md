@@ -14,6 +14,16 @@ $ poetry install --without=dev
 $ poetry run python -m aoc23 solve ${day} ${file}
 ```
 
+Auto-downloading Problem Input
+------------------------------
+
+You can provide the `session` cookie instead of the input data file:
+
+```sh
+$ session=01234dead...beef
+$ poetry run python -m aoc23 solve 13 --cookie=$session
+```
+
 Developing
 ----------
 
