@@ -87,5 +87,7 @@ class Day12(Solver):
   def solve_second_star(self) -> int:
     return sum(_match_one_template(*_unfold(template, groups)) for template, groups in self.input)
 
+  def flush_caches(self):
+    _match_one_template.cache_clear()
 
 # vim: ts=2:sw=2:et

@@ -15,6 +15,9 @@ class Solver:
   def solve_second_star(self) -> int:
     raise NotImplementedError()
 
+  def flush_caches(self):
+    pass
+
 def get_solver_for_day(d: int) -> Solver:
   if d not in _all_solvers:
     raise ValueError(f"solver does not exist for day {d}")
