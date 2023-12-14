@@ -40,12 +40,12 @@ class Day14(Solver):
   def solve_second_star(self) -> int:
     seen = {}
     order = []
-    for i in range(1000000000):
+    for i in range(1_000_000_000):
       order += [self.data.copy()]
       s = self.data.tobytes()
       if s in seen:
         loop_size = i - seen[s]
-        remainder = (1000000000 - i) % loop_size
+        remainder = (1_000_000_000 - i) % loop_size
         self.data = order[seen[s] + remainder]
         break
       seen[s] = i

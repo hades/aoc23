@@ -44,6 +44,6 @@ class Day11(Solver):
     return self.solve(2)
 
   def solve_second_star(self):
-    return self.solve(1000000)
+    return self.solve(1_000_000)
 
 # vim: ts=2:sw=2:et
