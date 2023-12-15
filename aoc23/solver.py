@@ -9,10 +9,10 @@ class Solver:
   def presolve(self, input: str):
     raise NotImplementedError()
 
-  def solve_first_star(self) -> int:
+  def solve_first_star(self) -> int|str:
     raise NotImplementedError()
 
-  def solve_second_star(self) -> int:
+  def solve_second_star(self) -> int|str:
     raise NotImplementedError()
 
   def flush_caches(self):
