@@ -12,6 +12,7 @@ portion = "^2.4.1"
 requests = "^2.31.0"
 pysocks = "^1.7.1"
 numpy = "^1.26.2"
+tomlkit = "^0.12.3"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.5.0"
@@ -19,6 +20,7 @@ pylint = "^3.0.2"
 pytest = "^7.4.3"
 pytype = "^2023.11.29"
 ruff = "^0.1.7"
+responses = "^0.24.1"
 
 [build-system]
 requires = ["poetry-core"]

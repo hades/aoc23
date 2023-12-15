@@ -10,6 +10,7 @@ from cleo.commands.command import Command
 from cleo.io.inputs.argument import Argument
 from cleo.io.inputs.option import Option
 
+from .autosubmit import submit
 from .solver import get_solver_for_day
 
 
@@ -41,6 +42,7 @@ class SolveCommand(Command):
   ]
   options = [
     Option("debug", description="Enables debug output", flag=True),
+    Option("submit", description="Automatically submit the answer", flag=True),
     Option("cookie", description="Session cookie for downloading input data", flag=False),
   ]
 
@@ -64,9 +66,17 @@ class SolveCommand(Command):
     with self.spin('solving', 'solved'):
       solution = solver.solve_first_star()
     self.line(f'Answer (first star): <comment>{solution}</>')
+    if self.option('submit'):
+      with self.spin('submitting first star answer', 'first star answer submitted'):
+        submit_result = submit(day, 1, str(solution), self.option('cookie'))
+      self.line(f'Submit result (first star): <comment>{submit_result.name}</>')
     with self.spin('solving', 'solved'):
       solution = solver.solve_second_star()
     self.line(f'Answer (second star): <comment>{solution}</>')
+    if self.option('submit'):
+      with self.spin('submitting second star answer', 'second star answer submitted'):
+        submit_result = submit(day, 2, str(solution), self.option('cookie'))
+      self.line(f'Submit result (second star): <comment>{submit_result.name}</>')
 
 class EvaluateCommand(Command):
   name = "evaluate"
