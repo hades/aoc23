@@ -33,30 +33,28 @@ class Day14(Solver):
           self.data[x, y] = 2
 
   def solve_first_star(self) -> int:
-    for y in range(self.data.shape[1]):
-      self.data[:, y] = _tilt(self.data[:, y].tolist())
-    return sum((self.data.shape[0] - x) * (self.data[x] == 2).sum() for x in range(self.data.shape[0]))
+    data = self.data.copy()
+    for y in range(data.shape[1]):
+      data[:, y] = _tilt(data[:, y].tolist())
+    return sum((data.shape[0] - x) * (data[x] == 2).sum() for x in range(data.shape[0]))
 
   def solve_second_star(self) -> int:
+    data = self.data.copy()
     seen = {}
     order = []
     for i in range(1_000_000_000):
-      order += [self.data.copy()]
-      s = self.data.tobytes()
+      order += [data.copy()]
+      s = data.tobytes()
       if s in seen:
         loop_size = i - seen[s]
         remainder = (1_000_000_000 - i) % loop_size
-        self.data = order[seen[s] + remainder]
+        data = order[seen[s] + remainder]
         break
       seen[s] = i
-      for y in range(self.data.shape[1]):
-        self.data[:, y] = _tilt(self.data[:, y].tolist())
-      for x in range(self.data.shape[0]):
-        self.data[x, :] = _tilt(self.data[x, :].tolist())
-      for y in range(self.data.shape[1]):
-        self.data[:, y] = _tilt(self.data[:, y].tolist(), reverse=True)
-      for x in range(self.data.shape[0]):
-        self.data[x, :] = _tilt(self.data[x, :].tolist(), reverse=True)
-    return sum((self.data.shape[0] - x) * (self.data[x] == 2).sum() for x in range(self.data.shape[0]))
+      for _ in range(4):
+        for y in range(data.shape[1]):
+          data[:, y] = _tilt(data[:, y].tolist())
+        data = np.rot90(data, axes=(1, 0))
+    return sum((data.shape[0] - x) * (data[x] == 2).sum() for x in range(data.shape[0]))
 
 # vim: ts=2:sw=2:et
