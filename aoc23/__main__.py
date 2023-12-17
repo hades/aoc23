@@ -44,6 +44,7 @@ class SolveCommand(Command):
     Option("debug", description="Enables debug output", flag=True),
     Option("submit", description="Automatically submit the answer", flag=True),
     Option("cookie", description="Session cookie for downloading input data", flag=False),
+    Option("second_only", description="Enables debug output", flag=True),
   ]
 
   def _setup_debug_logging(self):
@@ -63,14 +64,15 @@ class SolveCommand(Command):
       input = get_problem_input(self.argument('input_file'), day, self.option('cookie'))
     with self.spin('parsing and pre-solving', 'presolving complete'):
       solver.presolve(input)
-    with self.spin('solving', 'solved'):
-      solution = solver.solve_first_star()
-    self.line(f'Answer (first star): <comment>{solution}</>')
-    if self.option('submit'):
-      with self.spin('submitting first star answer', 'first star answer submitted'):
-        submit_result = submit(day, 1, str(solution), self.option('cookie'))
-      self.line(f'Submit result (first star): <comment>{submit_result.name}</>')
-    with self.spin('solving', 'solved'):
+    if not self.option('second_only'):
+      with self.spin('solving (first star)', 'solved (first star)'):
+        solution = solver.solve_first_star()
+      self.line(f'Answer (first star): <comment>{solution}</>')
+      if self.option('submit'):
+        with self.spin('submitting first star answer', 'first star answer submitted'):
+          submit_result = submit(day, 1, str(solution), self.option('cookie'))
+        self.line(f'Submit result (first star): <comment>{submit_result.name}</>')
+    with self.spin('solving (second star)', 'solved (second star)'):
       solution = solver.solve_second_star()
     self.line(f'Answer (second star): <comment>{solution}</>')
     if self.option('submit'):
