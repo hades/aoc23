@@ -1,7 +1,7 @@
 from .solver import Solver
 
 
-def _trace_beam(data, initial_beam_head):
+def _trace_beam(data: list[str], initial_beam_head: tuple[int, int, int, int]):
   wx = len(data[0])
   wy = len(data)
   beam_heads = [initial_beam_head]
