@@ -1,5 +1,6 @@
 import collections
-import re
+
+from aoc23.util import assert_full_match
 
 from .solver import Solver
 
@@ -9,12 +10,6 @@ def _hash(string: str) -> int:
   for c in string:
     result = (result + ord(c)) * 17 % 256
   return result
-
-def _assert_full_match(pattern: str, string: str):
-  m = re.fullmatch(pattern, string)
-  if not m:
-    raise RuntimeError(f'pattern {pattern} does not match {string}')
-  return m
 
 class Day15(Solver):
   input: list[str]
@@ -31,7 +26,7 @@ class Day15(Solver):
   def solve_second_star(self) -> int:
     boxes = [collections.OrderedDict() for _ in range(256)]
     for instruction in self.input:
-      label, op, value = _assert_full_match(r'([a-z]+)([=-])(\d*)', instruction).groups()
+      label, op, value = assert_full_match(r'([a-z]+)([=-])(\d*)', instruction).groups()
       box = boxes[_hash(label)]
       match op:
         case '-':

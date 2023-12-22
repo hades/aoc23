@@ -1,3 +1,4 @@
+import re
 from collections.abc import Callable
 
 
@@ -19,5 +20,13 @@ def upper_bound(start: int, stop: int, predicate: Callable[[int], bool]) -> int:
     else:
       stop = mid
   return stop
+
+def assert_full_match(pattern: str, string: str) -> re.Match:
+  """Matches the pattern against the string and raises an exception if the
+   pattern does not match the string."""
+  m = re.fullmatch(pattern, string)
+  if not m:
+    raise RuntimeError(f'pattern {pattern} does not match {string}')
+  return m
 
 # vim: ts=2:sw=2:et
