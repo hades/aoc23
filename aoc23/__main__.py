@@ -1,6 +1,7 @@
 import datetime
 import inspect
 import logging
+import sys
 import timeit
 import zoneinfo
 
@@ -127,6 +128,7 @@ app = Application()
 app.add(SolveCommand())
 app.add(EvaluateCommand())
 
+sys.setrecursionlimit(10000)
 app.run()
 
 # vim: ts=2:sw=2:et
