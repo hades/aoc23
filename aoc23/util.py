@@ -26,7 +26,7 @@ def assert_full_match(pattern: str, string: str) -> re.Match:
    pattern does not match the string."""
   m = re.fullmatch(pattern, string)
   if not m:
-    raise RuntimeError(f'pattern {pattern} does not match {string}')
+    raise RuntimeError(f'pattern {pattern!r} does not match {string!r}')
   return m
 
 # vim: ts=2:sw=2:et
