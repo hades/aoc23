@@ -2,14 +2,16 @@ import numpy as np
 import z3
 
 from aoc23.util import assert_full_match
+
 from .solver import Solver
+
 
 class Day24(Solver):
 
   def __init__(self):
     super().__init__(24)
     self.test_area = [200000000000000, 400000000000000]
-  
+
   def presolve(self, input: str):
     self.stones = []
     for line in input.splitlines():
