@@ -20,7 +20,7 @@ z3-solver = "^4.12.5.0"
 pre-commit = "^3.6.1"
 pylint = "^3.0.2"
 pytest = "^8.0.0"
-pytype = "^2024.1.24"
+pytype = "^2024.2.13"
 ruff = "^0.2.1"
 responses = "^0.24.1"
 
