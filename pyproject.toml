@@ -22,7 +22,7 @@ pylint = "^3.0.2"
 pytest = "^8.0.0"
 pytype = "^2024.2.13"
 ruff = "^0.2.1"
-responses = "^0.24.1"
+responses = "^0.25.0"
 
 [build-system]
 requires = ["poetry-core"]
