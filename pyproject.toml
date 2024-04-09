@@ -14,7 +14,7 @@ pysocks = "^1.7.1"
 numpy = "^1.26.4"
 tomlkit = "^0.12.4"
 networkx = "^3.1"
-z3-solver = "^4.12.5.0"
+z3-solver = "^4.13.0.0"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.7.0"
