@@ -20,7 +20,7 @@ z3-solver = "^4.13.0.0"
 pre-commit = "^3.7.0"
 pytest = "^8.2.0"
 pytype = "^2024.4.11"
-ruff = "^0.4.2"
+ruff = "^0.4.4"
 responses = "^0.25.0"
 
 [build-system]
