@@ -21,7 +21,7 @@ pre-commit = "^3.7.1"
 pytest = "^8.2.2"
 pytype = "^2024.4.11"
 ruff = "^0.4.8"
-responses = "^0.25.2"
+responses = "^0.25.3"
 
 [build-system]
 requires = ["poetry-core"]
