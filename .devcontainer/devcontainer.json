@@ -1,0 +1,15 @@
+{
+  "name": "Python",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "remoteUser": "dev",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "zeshuaro.vscode-python-poetry"
+      ]
+    }
+  }
+}
