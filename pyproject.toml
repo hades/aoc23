@@ -20,7 +20,7 @@ cleo = "^2.1.0"
 pre-commit = "^4.1.0"
 pytest = "^8.3.5"
 pytype = "^2024.10.11"
-ruff = "^0.9.7"
+ruff = "^0.9.9"
 responses = "^0.25.6"
 
 [build-system]
