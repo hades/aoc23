@@ -17,7 +17,7 @@ z3-solver = "^4.14.1.0"
 cleo = "^2.1.0"
 
 [tool.poetry.group.dev.dependencies]
-pre-commit = "^4.1.0"
+pre-commit = "^4.2.0"
 pytest = "^8.3.5"
 pytype = "^2024.10.11"
 ruff = "^0.11.2"
