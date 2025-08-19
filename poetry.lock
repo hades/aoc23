@@ -1217,22 +1217,22 @@ test = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "coverage-enable-subprocess
 
 [[package]]
 name = "z3-solver"
-version = "4.15.1.0"
+version = "4.15.3.0"
 description = "an efficient SMT solver library"
 optional = false
 python-versions = "*"
 groups = ["main"]
 files = [
-    {file = "z3_solver-4.15.1.0-py3-none-macosx_13_0_arm64.whl", hash = "sha256:4fdf8675500f32b03114670a8c734fa9fc9f8c9bd1047d575449ca69fa397ac5"},
-    {file = "z3_solver-4.15.1.0-py3-none-macosx_13_0_x86_64.whl", hash = "sha256:878814bef41ca3d9957923d07fc3084967d14dff1a3c039d00f76324461bb11b"},
-    {file = "z3_solver-4.15.1.0-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:0f1d15073c78d793be56ff334f3d4770fe66d57808fdad2780e25c936d8fab0a"},
-    {file = "z3_solver-4.15.1.0-py3-none-manylinux_2_34_aarch64.whl", hash = "sha256:1ac01865e9b07e35b8856157fa95259b1741529c05ef019f599675c7b0caab42"},
-    {file = "z3_solver-4.15.1.0-py3-none-win32.whl", hash = "sha256:0b41c73ed6ea30514210853e31b432c3654b36e7e7a74db23906ddba345cb654"},
-    {file = "z3_solver-4.15.1.0-py3-none-win_amd64.whl", hash = "sha256:1d858c5b7ecd60788576ec6ae62cc7b9ae142e9ed38dff3dfd415e2fe230c712"},
-    {file = "z3_solver-4.15.1.0.tar.gz", hash = "sha256:e8522602a76f6e45c45e78eec7bff5cbaa44fa51e94dce0d5432b0f9ab3f7064"},
+    {file = "z3_solver-4.15.3.0-py3-none-macosx_13_0_arm64.whl", hash = "sha256:65335aab295ded7c0ce27c85556067087a87052389ff160777d1a1d48ef0d74f"},
+    {file = "z3_solver-4.15.3.0-py3-none-macosx_13_0_x86_64.whl", hash = "sha256:3e62e93adff2def3537ff1ca67c3d58a6ca6d1944e0b5e774f88627b199d50e7"},
+    {file = "z3_solver-4.15.3.0-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:a9afd9ceb290482097474d43f08415bcc1874f433189d1449f6c1508e9c68384"},
+    {file = "z3_solver-4.15.3.0-py3-none-manylinux_2_34_aarch64.whl", hash = "sha256:f61ef44552489077eedd7e6d9bed52ef1875decf86d66027742099a2703b1c77"},
+    {file = "z3_solver-4.15.3.0-py3-none-win32.whl", hash = "sha256:0c603f6bad7423d6411adda6af55030b725e3d30f54ea91b714abcedd73b848a"},
+    {file = "z3_solver-4.15.3.0-py3-none-win_amd64.whl", hash = "sha256:06abdf6c36f97c463aea827533504fd59476d015a65cf170a88bd6a53ba13ab5"},
+    {file = "z3_solver-4.15.3.0.tar.gz", hash = "sha256:78f69aebda5519bfd8af146a129f36cf4721a3c2667e80d9fe35cc9bb4d214a6"},
 ]
 
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.10"
-content-hash = "bff27cba92d5803e1e742444dcad4a840f110cad26f1889f398aaf5dbe8b6688"
+content-hash = "c1894026d2fec873f47c16a20c10e5d33659f44e01da26a038ee0b870e0e99d6"
