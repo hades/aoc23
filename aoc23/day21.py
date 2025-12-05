@@ -56,7 +56,7 @@ class Day21(Solver):
     ) -> tuple[dict[tuple[int, int], dict[tuple[int, int], int]], list[int]]:
       positions = set()
       spills: dict[tuple[int, int], dict[tuple[int, int], int]] = collections.defaultdict(dict)
-      counts = []
+      counts: list[int] = []
       while time_limit is None or len(counts) <= time_limit:
         for i, j, spill_timestamp in spillins:
           if spill_timestamp == len(counts):
@@ -82,7 +82,9 @@ class Day21(Solver):
         positions = next_positions
       return spills, counts
 
-    process_block_cache = {}
+    process_block_cache: dict[
+      tuple[tuple[tuple[int, int, int], ...], int],
+      tuple[dict[tuple[int, int], dict[tuple[int, int], int]], list[int]]] = {}
     def _process_block_cached(spillins: set[tuple[int, int, int]], initial_block_odd: int,
                               time_limit: int|None = None
                               ) -> tuple[dict[tuple[int, int], dict[tuple[int, int], int]], list[int]]:
@@ -96,7 +98,7 @@ class Day21(Solver):
     positions = {(i, j) for i, line in enumerate(self.lines) for j, c in enumerate(line) if c == 'S'}
     initial_odd = sum(list(positions)[0]) % 2
     spills, counts = _process_block({(i, j, 0) for i, j in positions}, initial_odd)
-    queue: dict[tuple[int, int], set[tuple[int, int, int]]] = collections.OrderedDict()
+    queue: collections.OrderedDict[tuple[int, int], set[tuple[int, int, int]]] = collections.OrderedDict()
     for (bi, bj), spill_timestamps in spills.items():
       spillins = {(i % size_i, j % size_j, timestamp) for (i, j), timestamp in spill_timestamps.items()
                   if timestamp <= self.second_star_steps}

@@ -66,7 +66,7 @@ class Day22(Solver):
         reverse_support_map[support_brick_id].add(brick_id)
     total = 0
     for brick_id in range(self.brick_count):
-      all_destroyed_bricks = set()
+      all_destroyed_bricks: set[int] = set()
       queue = [brick_id]
       while queue:
         destroy_brick_id = queue.pop(0)

@@ -27,11 +27,11 @@ repos:
   - id: codespell
 - repo: local
   hooks:
-    - id: pytype
-      name: Checking Python typings with pytype
-      entry: poetry run pytype -j auto --keep-going
+    - id: mypy
+      name: Checking Python typings with mypy
+      entry: poetry run mypy
       language: system
-      pass_filenames: false
+      pass_filenames: true
       types: [python]
     - id: pytest
       name: Running unit tests

@@ -40,7 +40,7 @@ class Day14(Solver):
 
   def solve_second_star(self) -> int:
     data = self.data.copy()
-    seen = {}
+    seen: dict[bytes, int] = {}
     order = []
     for i in range(1_000_000_000):
       order += [data.copy()]

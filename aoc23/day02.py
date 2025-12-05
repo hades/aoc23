@@ -12,8 +12,8 @@ class Day02(Solver):
     lines = input.rstrip().split('\n')
     for line in lines:
       draws = line.split(': ')[1].split('; ')
-      draws = [draw.split(', ') for draw in draws]
-      self.games.append(draws)
+      draws2 = [draw.split(', ') for draw in draws]
+      self.games.append(draws2)
 
   def solve_first_star(self):
     game_id = 0

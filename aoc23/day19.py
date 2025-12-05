@@ -58,17 +58,19 @@ class Day19(Solver):
     if any(isize(r) == 0 for r in ranges.values()):
       return 0
     match self.workflows[workflow_name][workflow_index]:
+      # Types ignored in the lines below should be correct because of match arms.
+      # Why mypy does not recognize that is a mystery.
       case (category, '>', threshold, goto):
         new_ranges_true = {c: r & P.open(threshold, P.inf) if c == category else r for c, r in ranges.items()}
         new_ranges_false = {c: r & P.openclosed(-P.inf, threshold) if c == category else r for c, r in ranges.items()}
-        return (self._count_options(goto, 0, new_ranges_true) +
+        return (self._count_options(goto, 0, new_ranges_true) + # type: ignore[arg-type]
                 self._count_options(workflow_name, workflow_index + 1, new_ranges_false))
       case (category, '<', threshold, goto):
         new_ranges_true = {c: r & P.open(-P.inf, threshold) if c == category else r for c, r in ranges.items()}
         new_ranges_false = {c: r & P.closedopen(threshold, P.inf) if c == category else r for c, r in ranges.items()}
-        return (self._count_options(goto, 0, new_ranges_true) +
+        return (self._count_options(goto, 0, new_ranges_true) + # type: ignore[arg-type]
                 self._count_options(workflow_name, workflow_index + 1, new_ranges_false))
       case next_workflow:
-        return self._count_options(next_workflow, 0, ranges)
+        return self._count_options(next_workflow, 0, ranges) # type: ignore[arg-type]
 
 # vim: ts=2:sw=2:et

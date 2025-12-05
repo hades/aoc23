@@ -9,7 +9,7 @@ class Day25(Solver):
     super().__init__(25)
 
   def presolve(self, input: str):
-    self.graph = nx.Graph()
+    self.graph: nx.Graph = nx.Graph()
     for line in input.splitlines():
       from_, to_line = line.split(': ')
       for to in to_line.split(' '):

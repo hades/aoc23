@@ -13,7 +13,7 @@ _CARD_ORDER            = '23456789TJQKA'
 _CARD_ORDER_WITH_JOKER = 'J23456789TQKA'
 
 def evaluate_hand(hand: str, joker: bool = False) -> int:
-  card_counts = collections.defaultdict(int)
+  card_counts: dict[str, int] = collections.defaultdict(int)
   score = 0
   for card in hand:
     card_counts[card] += 1
@@ -62,7 +62,7 @@ class Day07(Solver):
 
   def __init__(self):
     super().__init__(7)
-    self.hands: list[tuple[str, str]] = []
+    self.hands: list[tuple[str, ...]] = []
 
   def presolve(self, input: str):
     lines = input.rstrip().split('\n')

@@ -76,13 +76,13 @@ class Day23(Solver):
     start_j = self.lines[0].find('.')
 
     stack = [(start_i, start_j)]
-    connections = {}
+    connections: dict[tuple[int, int], list[tuple[int, int, int]]] = {}
     visited = set()
     while stack:
       edge_i, edge_j = stack.pop()
       i, j = edge_i, edge_j
       path_length = 0
-      options = []
+      options: list[tuple[int, int]] = []
       connections[(edge_i, edge_j)] = []
       while True:
         options = []

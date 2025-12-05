@@ -66,8 +66,8 @@ class Day20(Solver):
 
 
   def solve_first_star(self) -> int:
-    flip_flops_on = set()
-    conjunction_high_pulses = collections.defaultdict(set)
+    flip_flops_on: set[str] = set()
+    conjunction_high_pulses: dict[str, set[str]] = collections.defaultdict(set)
     low_pulse_count = 0
     high_pulse_count = 0
     for _ in range(1000):
@@ -77,16 +77,16 @@ class Day20(Solver):
     return low_pulse_count* high_pulse_count
 
   def solve_second_star(self) -> int:
-    flip_flops_on = set()
-    conjunction_high_pulses = collections.defaultdict(set)
+    flip_flops_on: set[str] = set()
+    conjunction_high_pulses: dict[str, set[str]] = collections.defaultdict(set)
     button_count = 0
     rx_upstream = [module for module, (_, destinations) in self.modules.items() if 'rx' in destinations]
     if len(rx_upstream) != 1:
       rx_upstream = []
     else:
       rx_upstream = [module for module, (_, destinations) in self.modules.items() if rx_upstream[0] in destinations]
-    rx_upstream_periods = [None] * len(rx_upstream)
-    low_pulses = []
+    rx_upstream_periods: list[int|None] = [None] * len(rx_upstream)
+    low_pulses: list[str] = []
     while 'rx' not in low_pulses and (not rx_upstream or not all(rx_upstream_periods)):
       button_count += 1
       low_pulses, _ = self._press_button(flip_flops_on, conjunction_high_pulses)
@@ -97,6 +97,6 @@ class Day20(Solver):
           rx_upstream_periods[rx_upstream.index(module)] = button_count
     if 'rx' in low_pulses:
       return button_count
-    return math.lcm(*rx_upstream_periods)
+    return math.lcm(*[x or 0 for x in rx_upstream_periods])
 
 # vim: ts=2:sw=2:et

@@ -19,21 +19,15 @@ cleo = "^2.1.0"
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^4.3.0"
 pytest = "^9.0.1"
-pytype = "^2024.10.11"
 ruff = "^0.14.5"
 responses = "^0.25.8"
+mypy = "^1.19.0"
+types-networkx = "^3.6.0.20251127"
+types-requests = "^2.32.4.20250913"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
-
-[tool.pytype]
-inputs = [ '.' ]
-overriding_renamed_parameter_count_checks = true
-strict_none_binding = true
-strict_parameter_checks = true
-strict_primitive_comparisons = true
-strict_undefined_checks = true
 
 [tool.ruff]
 line-length = 120

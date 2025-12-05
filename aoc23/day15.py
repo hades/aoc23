@@ -24,7 +24,7 @@ class Day15(Solver):
     return sum(_hash(string) for string in self.input)
 
   def solve_second_star(self) -> int:
-    boxes = [collections.OrderedDict() for _ in range(256)]
+    boxes: list[collections.OrderedDict[str, str]] = [collections.OrderedDict() for _ in range(256)]
     for instruction in self.input:
       label, op, value = assert_full_match(r'([a-z]+)([=-])(\d*)', instruction).groups()
       box = boxes[_hash(label)]

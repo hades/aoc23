@@ -25,8 +25,8 @@ class Day10(Solver):
     return (di, dj) in _EXITS_MAP[self.maze[(x, y)]]
 
   def presolve(self, input: str):
-    self.maze: dict[tuple[int, int], str] = {}
-    self.start: tuple[int, int] = (0, 0)
+    self.maze = {}
+    self.start = (0, 0)
     for y, line in enumerate(input.rstrip().split('\n')):
       for x, c in enumerate(line):
         self.maze[(x, y)] = c

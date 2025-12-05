@@ -73,7 +73,7 @@ class Day12(Solver):
 
   def __init__(self):
     super().__init__(12)
-    self.input: list[tuple[str, tuple[int]]] = []
+    self.input: list[tuple[str, tuple[int, ...]]] = []
 
   def presolve(self, input: str):
     lines = input.rstrip().split('\n')
