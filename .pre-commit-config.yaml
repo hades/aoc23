@@ -29,13 +29,13 @@ repos:
   hooks:
     - id: mypy
       name: Checking Python typings with mypy
-      entry: poetry run mypy
+      entry: uv run mypy
       language: system
       pass_filenames: true
       types: [python]
     - id: pytest
       name: Running unit tests
-      entry: poetry run pytest -q
+      entry: uv run pytest -q
       language: system
       pass_filenames: false
       types: [python]

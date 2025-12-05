@@ -10,8 +10,7 @@ Running
 ```sh
 $ day=1          # which challenge you want to solve
 $ file=day01.in  # where the challenge input is stored
-$ poetry install --without=dev
-$ poetry run python -m aoc23 solve ${day} ${file}
+$ uv run --no-dev python -m aoc23 solve ${day} ${file}
 ```
 
 Auto-downloading Problem Input
@@ -21,7 +20,7 @@ You can provide the `session` cookie instead of the input data file:
 
 ```sh
 $ session=01234dead...beef
-$ poetry run python -m aoc23 solve 13 --cookie=$session
+$ uv run --no-dev python -m aoc23 solve 13 --cookie=$session
 ```
 
 Evaluation
@@ -33,8 +32,8 @@ of the input files, or a cookie:
 
 ```sh
 $ session=01234dead...beef
-$ poetry run python -m aoc23 evaluate *.txt
-$ poetry run python -m aoc23 evaluate --cookie=$session
+$ uv run --no-dev python -m aoc23 evaluate *.txt
+$ uv run --no-dev python -m aoc23 evaluate --cookie=$session
 ```
 
 Developing
@@ -44,8 +43,7 @@ Please install the pre-commit hooks to make sure your code passes my very high
 quality standards. /s
 
 ```sh
-$ poetry install --with=dev
-$ poetry run pre-commit install
+$ uv run --all-groups pre-commit install
 ```
 
 Add unit tests for all solutions and utility functions.
