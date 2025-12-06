@@ -1,5 +1,3 @@
-# type: ignore
-
 import datetime
 import inspect
 import logging
@@ -103,7 +101,7 @@ class EvaluateCommand(Command):
     solver.solve_first_star()
     solver.solve_second_star()
 
-  def handle(self):
+  def handle(self) -> int:
     days = min(25, (datetime.datetime.now(tz=zoneinfo.ZoneInfo('America/New_York')).date() -
                     datetime.date(2023, 12, 1)).days + 1)
     repeats = int(self.option('repeats_for_timing'))
@@ -120,10 +118,14 @@ class EvaluateCommand(Command):
         times.append(min(timeit.repeat(
           lambda: self.__solve_both_for_day(day, input),  # noqa: B023
           repeat=repeats, number=1)))
-      linecounts.append(len(inspect.getsource(inspect.getmodule(type(get_solver_for_day(day)))).splitlines()))
+      mod = inspect.getmodule(type(get_solver_for_day(day)))
+      if mod is None:
+        raise RuntimeError(f"unable to inspect.getmodule for solver for day {day}")
+      linecounts.append(len(inspect.getsource(mod).splitlines()))
     self.table().set_headers(['Day', 'Time (s)', 'Lines', 'line-seconds']).add_rows([
       [f'{day:2d}', f'{time:5.3f}', f'{linecount:4d}', f'{time * linecount:6.3f}']
       for day, time, linecount in zip(range(1, days + 1), times, linecounts, strict=True)]).render()
+    return 0
 
 
 app = Application()
