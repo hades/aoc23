@@ -27,6 +27,12 @@ repos:
   - id: codespell
 - repo: local
   hooks:
+    - id: uv_lock
+      name: Checking uv lock file
+      entry: uv lock --check
+      language: system
+      pass_filenames: false
+      files: ^pyproject.toml$
     - id: mypy
       name: Checking Python typings with mypy
       entry: uv run mypy
