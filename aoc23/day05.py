@@ -13,7 +13,7 @@ _maps = [
 ]
 
 def group_lines_in_maps(lines):
-  group = []
+  group: list[str] = []
   for line in lines:
     if not line:
       yield group

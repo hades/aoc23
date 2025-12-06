@@ -35,7 +35,7 @@ class Day02(Solver):
   def solve_second_star(self):
     total = 0
     for game in self.games:
-      minimums = collections.defaultdict(lambda: 0)
+      minimums: dict[str, int] = collections.defaultdict(lambda: 0)
       for draw in game:
         for item in draw:
           count, colour = item.split(' ')

@@ -27,7 +27,7 @@ class Day04(Solver):
     return points
 
   def solve_second_star(self):
-    factors = collections.defaultdict(lambda: 1)
+    factors: dict[int, int] = collections.defaultdict(lambda: 1)
     count = 0
     for i, (winning, having) in enumerate(self.cards):
       count += factors[i]
