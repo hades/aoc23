@@ -113,7 +113,7 @@ class Day21(Solver):
     else:
       processed_blocks[0] = (0, 1)
     while queue:
-      (bi, bj), spillins = queue.popitem(last=False)  # pytype: disable=wrong-keyword-args
+      (bi, bj), spillins = queue.popitem(last=False)
       dt = min(timestamp for _, _, timestamp in spillins)
       corrected_spillins = {(i, j, timestamp - dt) for i, j, timestamp in spillins}
       spillouts, counts = _process_block_cached(
