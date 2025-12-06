@@ -1,5 +1,3 @@
-# type: ignore
-
 import functools
 import tempfile
 import unittest
