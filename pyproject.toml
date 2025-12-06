@@ -3,7 +3,7 @@ name = "aoc23"
 version = "1.0.0"
 description = "Solutions for Advent of Code 2023"
 authors = [{ name = "Edward Toroshchyn", email = "dev@hades.name" }]
-requires-python = ">=3.10,<4"
+requires-python = ">=3.11,<4"
 readme = "README.md"
 dependencies = [
     "portion>=2.6.1,<3",
