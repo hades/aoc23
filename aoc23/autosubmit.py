@@ -1,10 +1,9 @@
-# type: ignore
-
 import enum
 import logging
 import pathlib
 import re
 import time
+from typing import TypedDict
 
 import requests
 import tomlkit
@@ -17,6 +16,12 @@ class Result(enum.Enum):
   REJECTED = 1
   REJECTED_TOO_LOW = 2
   REJECTED_TOO_HIGH = 3
+
+class ResultTable(TypedDict):
+  accepted: str
+  rejected: list[str]
+  upper_bound: int
+  lower_bound: int
 
 def _submit_to_server(day: int, part: int, answer: str, cookie: str) -> Result:
   url = f'https://adventofcode.com/2023/day/{day}/answer'
@@ -59,39 +64,43 @@ def submit(day: int, part: int, answer: str, cookie: str) -> Result:
   key = f"day{day}.part{part}"
   if key not in results:
     results[key] = tomlkit.table()
-  if 'accepted' in results[key]:
-    logging.debug("answer %s for %s.%s is already accepted", results[key]['accepted'], day, part)
-    return Result.ACCEPTED if answer == results[key]['accepted'] else Result.REJECTED
-  if 'upper_bound' in results[key]:
-    if int(answer) >= results[key]['upper_bound']:
+  # tomlkit types are not exported and therefore it's a bit tricky to use them
+  # for typechecking. See https://github.com/python-poetry/tomlkit/issues/326
+  assert results[key].is_table()  # type: ignore
+  result_table: ResultTable = results.item(key)  # type: ignore
+  if 'accepted' in result_table:
+    logging.debug("answer %s for %s.%s is already accepted", result_table['accepted'], day, part)
+    return Result.ACCEPTED if answer == result_table['accepted'] else Result.REJECTED
+  if 'upper_bound' in result_table:
+    if int(answer) >= result_table['upper_bound']:
       logging.debug("answer %s for %s.%s is not lower than a previously rejected answer %s",
-                    answer, day, part, results[key]['upper_bound'])
+                    answer, day, part, result_table['upper_bound'])
       return Result.REJECTED_TOO_HIGH
-  if 'lower_bound' in results[key]:
-    if int(answer) <= results[key]['lower_bound']:
+  if 'lower_bound' in result_table:
+    if int(answer) <= result_table['lower_bound']:
       logging.debug("answer %s for %s.%s is not higher than a previously rejected answer %s",
-                    answer, day, part, results[key]['lower_bound'])
+                    answer, day, part, result_table['lower_bound'])
       return Result.REJECTED_TOO_LOW
-  if answer in results[key].get('rejected', []):
+  if answer in result_table.get('rejected', []):
     logging.debug("answer %s for %s.%s is already rejected", answer, day, part)
     return Result.REJECTED
   result = _submit_to_server(day, part, answer, cookie)
   if result == Result.ACCEPTED:
-    results[key]['accepted'] = answer
+    result_table['accepted'] = answer
   if result == Result.REJECTED_TOO_HIGH:
     upper_bound = int(answer)
-    if 'upper_bound' in results[key]:
-      upper_bound = min(upper_bound, results[key]['upper_bound'])
-    results[key]['upper_bound'] = int(answer)
+    if 'upper_bound' in result_table:
+      upper_bound = min(upper_bound, result_table['upper_bound'])
+    result_table['upper_bound'] = int(answer)
   if result == Result.REJECTED_TOO_LOW:
     lower_bound = int(answer)
-    if 'lower_bound' in results[key]:
-      lower_bound = max(lower_bound, results[key]['lower_bound'])
-    results[key]['lower_bound'] = int(answer)
+    if 'lower_bound' in result_table:
+      lower_bound = max(lower_bound, result_table['lower_bound'])
+    result_table['lower_bound'] = int(answer)
   if result == Result.REJECTED:
-    if 'rejected' not in results[key]:
-      results[key]['rejected'] = []
-    results[key]['rejected'].append(answer)
+    if 'rejected' not in result_table:
+      result_table['rejected'] = []
+    result_table['rejected'].append(answer)
   with file_path.open('w') as f:
     f.write(tomlkit.dumps(results))
   return result
