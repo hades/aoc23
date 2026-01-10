@@ -2,6 +2,7 @@ name: str()
 run-name: str()
 on: list(str())
 jobs: map(include('job'), key=str())
+env: map(str(), key=str())
 ---
 job:
   runs-on: str()
