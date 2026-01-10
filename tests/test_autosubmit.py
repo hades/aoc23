@@ -10,8 +10,9 @@ from aoc23 import autosubmit
 def temp_autosubmit_results(f):
   @functools.wraps(f)
   def wrapper(*args, **kwargs):
-    with tempfile.NamedTemporaryFile() as file:
+    with tempfile.NamedTemporaryFile(delete_on_close=False) as file:
       autosubmit._RESULT_STORE_FILE = file.name
+      file.close()
       return f(*args, **kwargs)
   return wrapper
 
